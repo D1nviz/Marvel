@@ -7,7 +7,6 @@ class MarvelService {
 		if (!res.ok) {
 			throw new Error(`Could not fetch ${url}, status: ${res.status}`);
 		}
-
 		return await res.json();
 	};
 
@@ -21,7 +20,7 @@ class MarvelService {
 			`${this._apiBase}/characters/${id}?${this._apiKey}`
 		);
 
-      return this._transformCharacter(res.data.results[0])
+      return this._transformCharacter(res.data.results[0]);
 	};
 
 	_transformCharacter = (char) => {
@@ -34,5 +33,3 @@ class MarvelService {
 		};
 	};
 }
-
-export default MarvelService;
