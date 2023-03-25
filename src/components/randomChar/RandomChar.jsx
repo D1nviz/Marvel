@@ -8,39 +8,39 @@ import "./randomChar.scss";
 import mjolnir from "../../resources/img/mjolnir.png";
 
 class RandomChar extends Component {
-	constructor(props) {
-		super(props);
-		
-	}
 	state = {
 		char: {},
 		loading: true,
       error: false 
 	};
     
-   
 	marvelService = new MarvelService();
 
 	componentDidMount () {
 		this.updateChar();
-		this.timerId = setInterval(this.updateChar, 1000);
-		
+		this.timerId = setInterval(this.updateChar, 50000)
 	}
 
 	componentWillUnmount() {
-		this.timerId = clearInterval(this.timerId);
+		clearInterval(this.timerId);
 	}
 	onError = () => {
 		this.setState({
 			 loading: false,
 			 error: true
 		})
+		clearInterval(this.timerId);
   }
 	onCharLoaded = (char) => {
 		this.setState({ char, loading: false });
 	};
 
 	updateChar = () => {
+		this.setState({
+			loading: true,
+			error: false
+		});
+
 		const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
 		this.marvelService
             .getCharacter(id)
@@ -55,6 +55,7 @@ class RandomChar extends Component {
 		const content = !(loading || error) ? <View char={char}/> : null;
 
 		return (
+			
 			<div className="randomchar">
 				{errorMessage}
 				{spinner}
@@ -67,7 +68,8 @@ class RandomChar extends Component {
 					</p>
 					<p className="randomchar__title">Or choose another one</p>
 					<button className="button button__main">
-						<div className="inner">try it</div>
+						<div className="inner"
+						onClick={this.updateChar}>try it</div>
 					</button>
 					<img
 						src={mjolnir}
@@ -86,6 +88,7 @@ const View = ({ char }) => {
 		<div className="randomchar__block">
 			<img
 				src={thumbnail}
+				style={{objectFit: thumbnail.includes("image_not_available")?"contain":"cover"}}
 				alt="Random character"
 				className="randomchar__img"
 			/>
