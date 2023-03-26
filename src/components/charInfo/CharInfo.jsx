@@ -73,7 +73,7 @@ class CharInfo extends Component {
 const View = ({ char }) => {
 
 	const { name, description, thumbnail, homepage, wiki, comics } = char;
-	let slicedComics = comics.length > 4 ? comics.slice(0, 5) : comics;
+	let slicedComics = comics.length > 9 ? comics.slice(0, 10) : comics;
 	return (
 		<>
 			<div className="char__basics">
