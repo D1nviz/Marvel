@@ -90,7 +90,7 @@ const CharList = (props) => {
 			</button>
 		</div>
 	)
-}
+};
 
 CharList.propTypes = {
 	onCharSelected: PropTypes.func.isRequired
