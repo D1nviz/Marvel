@@ -48,7 +48,6 @@ const CharList = (props) => {
 		itemRefs.current[id].focus()
 	}
 	const renderItems = arr => {
-
 		const items = arr.map((item, i) => {
 			return (
 				<li className="char__item"
