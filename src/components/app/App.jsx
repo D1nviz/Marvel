@@ -7,7 +7,7 @@ import CharInfo from "../charInfo/CharInfo";
 import ComicsList from "../comicsList/ComicsList";
 import ErrorBoundary from "../errorBoundary/ErrorBoundaty";
 
-import decoration from '../../resources/img/vision.png';
+import decoration from '../../resources/img/spiderman.png';
 
 const App = () => {
 	const [selectedChar, setChar] = useState(null);
@@ -23,8 +23,11 @@ const App = () => {
 					<CharList onCharSelected={onCharSelected} />
 					<ErrorBoundary> <CharInfo charId={selectedChar} /></ErrorBoundary>
 				</div>
-				<ComicsList/>
-				<img className="bg-decoration" src={decoration} alt="vision" />
+				{/* <ComicsList/> */}
+				<div className="box-decoration">
+					<img className="bg-decoration" src={decoration} alt="vision" />
+				</div>
+				
 			</main>
 		</div>
 	)
