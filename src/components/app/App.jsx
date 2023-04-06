@@ -8,7 +8,7 @@ import ComicsList from "../comicsList/ComicsList";
 import ErrorBoundary from "../errorBoundary/ErrorBoundaty";
 
 import decoration from '../../resources/img/vision.png';
-
+console.log(process.env.REACT_APP_WEATHER_API_KEY)
 const App = () => {
 
 	const [selectedChar, setChar] = useState(null);

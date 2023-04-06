@@ -21,23 +21,16 @@ const CharList = (props) => {
 	const onRequest = (offset, initial) => {
 		initial ? setNewItemLoading(false) : setNewItemLoading(true);
 		getAllCharacters(offset).then(onCharListLoaded);
-	}
-	
-
+	};
 
 	const onCharListLoaded = (newCharList) => {
-		let ended = false;
+		let ended = newCharList.length < 9 ? setNewItemLoading(true) : setNewItemLoading(false);
 
-		if (newCharList.length < 9) {
-			ended = true;
-		}
 		setCharList(charList => [...charList, ...newCharList]);
 		setNewItemLoading(false);
 		setOffset(offset => offset + 9);
 		setEndChar(ended)
-	}
-
-
+	};
 
 	const itemRefs = useRef([]);
 
@@ -46,7 +39,8 @@ const CharList = (props) => {
 		itemRefs.current.forEach(item => item.classList.remove('char__item_selected'));
 		itemRefs.current[id].classList.add('char__item_selected');
 		itemRefs.current[id].focus()
-	}
+	};
+
 	const renderItems = arr => {
 		const items = arr.map((item, i) => {
 			return (
@@ -69,7 +63,7 @@ const CharList = (props) => {
 					<div className="char__name">{item.name}</div>
 				</li>
 			)
-		})
+		});
 
 		return (
 			<ul className="char__grid">
@@ -96,7 +90,6 @@ const CharList = (props) => {
 			</button>
 		</div>
 	)
-
 }
 
 CharList.propTypes = {

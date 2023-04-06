@@ -76,7 +76,7 @@ const View = ({ char }) => {
 					slicedComics.map((item, i) => {
 						return (
 							<li key={i} className="char__comics-item">
-								<a href={item.resourceURI}>{item.name}</a>
+								{item.name}
 							</li>
 						)
 					})
