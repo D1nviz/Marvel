@@ -60,7 +60,6 @@ const RandomChar = () => {
 	);
 }
 
-
 const View = ({char}) => {
 	const {name, description, thumbnail, homepage, wiki} = char;
 	let imgStyle = {'objectFit' : 'cover'};
