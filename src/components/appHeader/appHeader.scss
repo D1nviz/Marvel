@@ -4,6 +4,11 @@
 	&__header {
 		display: flex;
 		justify-content: space-between;
+		color: white;
+		background-color: #232222;
+		width: 100%;
+		padding: 15px 15px;
+		
 	}
 	&__title {
 		font-weight: bold;
@@ -22,9 +27,9 @@
 			line-height: 32px;
 			li {
 				margin: 0 8px;
-                &:hover {
-                    color: $main-color;
-                }
+				&:hover {
+					color: $main-color;
+				}
 			}
 		}
 	}
