@@ -3,7 +3,6 @@ import './appHeader.scss';
 
 const activeColor = (isActive) => ({ color: isActive ? '#9f0013' : "inherit" });
 
-
 const AppHeader = () => {
 	return (
 		<header className="app__header">

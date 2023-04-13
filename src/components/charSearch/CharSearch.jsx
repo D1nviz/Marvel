@@ -62,7 +62,7 @@ const CharSearch = () => {
                <ErrorMessage component="div" className="char__search-error" name="charName" />
             </Form>
          </Formik>
-          {results} 
+         {results} 
          {errorMessage}
       </div>
    )

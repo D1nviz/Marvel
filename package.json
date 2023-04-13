@@ -1,5 +1,6 @@
 {
   "name": "marvel",
+  "homepage": "https://d1nviz.github.io/Marvel/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -46,6 +47,5 @@
   },
   "devDependencies": {
     "sass": "^1.38.0"
-  },
-  "homepage": "https://d1nviz.github.io/Marvel/"
+  }
 }
