@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Helmet } from "react-helmet"
 import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
@@ -14,6 +14,10 @@ const MainPage = () => {
    const onCharSelected = (id) => setChar(id);
    return (
       <>
+         <Helmet>
+            <meta name="description" content="Marvel information portal" />
+            <title>Marvel information</title>
+         </Helmet>
          <ErrorBoundary> <RandomChar /></ErrorBoundary>
          <div className="char__content">
             <CharList onCharSelected={onCharSelected} />
@@ -30,6 +34,7 @@ const MainPage = () => {
          <div className="box-decoration">
             <img className="bg-decoration" src={decoration} alt="vision" />
          </div>
+
 
       </>
    )
