@@ -1,10 +1,10 @@
 import { useHttp } from "../hooks/http.hook";
 
 const useMarvelService = () => {
-	const { loading, request, error, clearError } = useHttp();
+	const {  request, clearError, proc, setProcess } = useHttp();
 
-	const _apiBase = process.env.REACT_APP_API_BASE ;
-	const _apiKey =`apikey=${process.env.REACT_APP_API_KEY}`;
+	const _apiBase = process.env.REACT_APP_API_BASE;
+	const _apiKey = `apikey=${process.env.REACT_APP_API_KEY}`;
 	const _baseOffset = 210;
 
 	const getCharacterByName = async (name) => {
@@ -60,8 +60,17 @@ const useMarvelService = () => {
 			url: comics.urls[0].url
 		}
 	};
-	
-	return { loading, error, getAllCharacters, getCharacter, clearError, getAllComics, getComic, getCharacterByName}
+
+	return {
+		proc,
+		setProcess,
+		getAllCharacters,
+		getCharacter,
+		clearError,
+		getAllComics,
+		getComic,
+		getCharacterByName
+	}
 }
 
 export default useMarvelService;

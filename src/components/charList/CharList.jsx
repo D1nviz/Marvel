@@ -1,12 +1,27 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import useMarvelService from '../../services/MarvelService';
-import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
+import Spinner from '../spinner/Spinner';
 
 import './charList.scss';
+
+const setContent = (proc, Component, newItemLoading) => {
+	switch (proc) {
+      case "waiting":
+         return <Spinner />
+      case "loading":
+         return newItemLoading ?  <Component/> :  <Spinner />
+      case "confirmed":
+         return <Component />
+      case "error":
+         return <ErrorMessage />
+      default:
+         throw new Error("Unexpected process state");
+   }
+}
 
 const CharList = (props) => {
 
@@ -15,7 +30,7 @@ const CharList = (props) => {
 	const [offset, setOffset] = useState(304);
 	const [charEnded, setCharEnded] = useState(false);
 
-	const { loading, error, getAllCharacters } = useMarvelService();
+	const { getAllCharacters, proc, setProcess } = useMarvelService();
 
 	useEffect(() => {
 		onRequest(offset, true);
@@ -25,6 +40,7 @@ const CharList = (props) => {
 		initial ? setnewItemLoading(false) : setnewItemLoading(true);
 		getAllCharacters(offset)
 			.then(onCharListLoaded)
+			.then(() => setProcess("confirmed"));
 	}
 
 	const onCharListLoaded = async (newCharList) => {
@@ -85,16 +101,13 @@ const CharList = (props) => {
 		)
 	}
 
-	const items = renderItems(charList);
-
-	const errorMessage = error ? <ErrorMessage /> : null;
-	const spinner = loading && !newItemLoading ? <Spinner /> : null;
+	const elements = useMemo(() => {
+		return setContent(proc, () => renderItems(charList), newItemLoading)
+	}, [proc]);
 
 	return (
 		<div className="char__list">
-			{errorMessage}
-			{spinner}
-			{items}
+			{elements}
 			<button
 				disabled={newItemLoading}
 				style={{ 'display': charEnded ? 'none' : 'block' }}

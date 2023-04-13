@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import './appHeader.scss';
 
-const activeColor = (isActive) => ({ color: isActive ? '#9f0013' : "inherit" });
+const activeColor = (isActive) => ({ color: isActive ? '#C70018' : "inherit" });
 
 const AppHeader = () => {
 	return (

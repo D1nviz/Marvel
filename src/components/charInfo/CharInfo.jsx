@@ -1,10 +1,8 @@
+import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
-import PropTypes from 'prop-types';
 import useMarvelService from '../../services/MarvelService';
-import ErrorMessage from '../errorMessage/ErrorMessage';
-import Spinner from '../spinner/Spinner';
-import Skeleton from "../skeleton/Skeleton"
+import setContent from '../../utils/setContent';
 
 
 import './charInfo.scss';
@@ -14,39 +12,31 @@ const CharInfo = (props) => {
 
 	const [char, setChar] = useState(null);
 
-	const {loading, error, getCharacter, clearError} = useMarvelService();
+	const {getCharacter,proc, setProcess} = useMarvelService();
 
 	useEffect(() => updateChar(), [props.charId]);
 
 	const updateChar = () => {
-		clearError();
 		const { charId } = props;
 		if (!charId) return;
 		
-		getCharacter(charId).then(onCharLoaded)
+		getCharacter(charId)
+			.then(onCharLoaded)
+			.then(() => setProcess("confirmed"));
 	}
 
 	const onCharLoaded = char => setChar(char);
-	
-
-	const skeleton = char || loading || error ? null : <Skeleton />
-	const errorMessage = error ? <ErrorMessage /> : null;
-	const spinner = loading ? <Spinner /> : null;
-	const content = !(loading || error || !char) ? <View char={char} /> : null;
 
 	return (
 		<div className="char__info">
-			{skeleton}
-			{errorMessage}
-			{spinner}
-			{content}
+			{setContent(proc, View, char)}
 		</div>
 	)
 }
 
-const View = ({ char }) => {
+const View = ({ data }) => {
 
-	const { name, description, thumbnail, homepage, wiki, comics } = char;
+	const { name, description, thumbnail, homepage, wiki, comics } = data;
 	let slicedComics = comics.length > 9 ? comics.slice(0, 10) : comics;
 	return (
 		<>
