@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-
+import { NavLink } from 'react-router-dom';
 import useMarvelService from '../../services/MarvelService';
 import setContent from '../../utils/setContent';
 
@@ -12,14 +12,14 @@ const CharInfo = (props) => {
 
 	const [char, setChar] = useState(null);
 
-	const {getCharacter,proc, setProcess} = useMarvelService();
+	const { getCharacter, proc, setProcess } = useMarvelService();
 
 	useEffect(() => updateChar(), [props.charId]);
 
 	const updateChar = () => {
 		const { charId } = props;
 		if (!charId) return;
-		
+
 		getCharacter(charId)
 			.then(onCharLoaded)
 			.then(() => setProcess("confirmed"));
@@ -66,7 +66,9 @@ const View = ({ data }) => {
 					slicedComics.map((item, i) => {
 						return (
 							<li key={i} className="char__comics-item">
-								{item.name}
+								<NavLink to={`/comics/${item.resourceURI.substring(43)}`}>
+									{item.name}
+								</NavLink>
 							</li>
 						)
 					})
