@@ -1,8 +1,9 @@
 import "./spinner.scss"
+
 const Spinner = () => {
-    return (
-        <div className="lds-dual-ring"></div>
-    )
+  return (
+    <div className="lds-dual-ring"></div>
+  )
 }
 
 export default Spinner;

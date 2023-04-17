@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import {lazy, Suspense} from "react";
 
 import AppHeader from "../appHeader/AppHeader";
 import Spinner from "../spinner/Spinner";
@@ -13,24 +13,25 @@ const SinglePage = lazy(() => import('../pages/SinglePage'));
 
 
 const App = () => {
-	return (
-		<Router basename="/Marvel">
-			<div className="app">
-				<AppHeader />
-				<main>
-					<Suspense fallback={<Spinner/>}>
-						<Routes>
-							<Route path="/" element={<MainPage />} />
-							<Route path="/comics" element={<ComicsPage />} />
-							<Route exact path="/comics/:id" element={<SinglePage Component={SingleComicLayout} dataType='comic'/>}/>
-                     <Route exact path="/characters/:id" element={<SinglePage Component={SingleCharacterLayout} dataType='character'/>}/>
-							<Route path="*" element={<Page404 />} />
-						</Routes>
-					</Suspense>
-				</main>
-			</div>
-		</Router>
-	)
+  return (
+    <Router basename="/Marvel">
+      <div className="app">
+        <AppHeader/>
+        <main>
+          <Suspense fallback={<Spinner/>}>
+            <Routes>
+              <Route path="/" element={<MainPage/>}/>
+              <Route path="/comics" element={<ComicsPage/>}/>
+              <Route exact path="/comics/:id" element={<SinglePage Component={SingleComicLayout} dataType='comic'/>}/>
+              <Route exact path="/characters/:id"
+                     element={<SinglePage Component={SingleCharacterLayout} dataType='character'/>}/>
+              <Route path="*" element={<Page404/>}/>
+            </Routes>
+          </Suspense>
+        </main>
+      </div>
+    </Router>
+  )
 }
 
 export default App;
